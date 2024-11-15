@@ -6957,7 +6957,7 @@ class Form
 
 		if ($num > 0) {
 			// Definition du taux a pre-selectionner (si defaulttx non force et donc vaut -1 ou '')
-			if ($defaulttx < 0 || dol_strlen($defaulttx) == 0) {
+			if ($defaulttx <= 0) {
 				$tmpthirdparty = new Societe($this->db);
 
 				$defaulttx = get_default_tva($societe_vendeuse, (is_object($societe_acheteuse) ? $societe_acheteuse : $tmpthirdparty), $idprod);
@@ -6974,7 +6974,7 @@ class Form
 
 			// If we fails to find a default vat rate, we take the last one in list
 			// Because they are sorted in ascending order, the last one will be the higher one (we suppose the higher one is the current rate)
-			if ($defaulttx < 0 || dol_strlen($defaulttx) == 0) {
+			if ($defaulttx <= 0) {
 				if (!getDolGlobalString('MAIN_VAT_DEFAULT_IF_AUTODETECT_FAILS')) {
 					// We take the last one found in list
 					$defaulttx = $arrayofvatrates[$num - 1]['txtva'];
